@@ -39,7 +39,7 @@ namespace MVCWebApp.Controllers
             {
 
                 var newFilename = Guid.NewGuid().ToString()+Path.GetExtension(picture.FileName);
-                await _blobStorage.UploadAsync(picture.OpenReadStream(), newFilename, EContainerName.pictures);
+                await _blobStorage.UploadAsync(picture.OpenReadStream(), newFilename, EContainerName.pictures, "application/octet-stream");
                 await _blobStorage.SetLogAsync("File Uploaded succesfully", "controller.txt");
             }
             catch (Exception)
@@ -82,7 +82,7 @@ namespace MVCWebApp.Controllers
             {
 
                 var newFilename = Guid.NewGuid().ToString()+Path.GetExtension(pdf.FileName);
-                await _blobStorage.UploadAsync(pdf.OpenReadStream(), newFilename, EContainerName.pdf);
+                await _blobStorage.UploadAsync(pdf.OpenReadStream(), newFilename, EContainerName.pdf,"application/pdf");
                 await _blobStorage.SetLogAsync("Pdf File Uploaded succesfully", "controller.txt");
             }
             catch (Exception)

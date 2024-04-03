@@ -45,19 +45,8 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script>
-
-        function showPdf(fileUrl) {
-            //var pdfViewer = document.getElementById('pdfViewer');
-            pdfViewer.src = fileUrl;
-            pdfViewer.style.display = 'block';
-            PDFObject.embed(pdfUrl, 'pdfViewer');
-        }
-
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

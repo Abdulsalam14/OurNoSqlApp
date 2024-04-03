@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs.Specialized;
 using System;
 using System.Collections.Generic;
@@ -94,7 +95,7 @@ namespace AzureStorageLibrary.Services
             }
         }
 
-        public async Task UploadAsync(Stream fileStream, string fileName, EContainerName eContainerName)
+        public async Task UploadAsync(Stream fileStream, string fileName, EContainerName eContainerName,string contentType)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient(eContainerName.ToString());
             await containerClient.CreateIfNotExistsAsync();
@@ -103,7 +104,7 @@ namespace AzureStorageLibrary.Services
 
             var blobClient = containerClient.GetBlobClient(fileName);
 
-            await blobClient.UploadAsync(fileStream);
+            await blobClient.UploadAsync(fileStream, new BlobHttpHeaders { ContentType = contentType });
         }
     }
 }
