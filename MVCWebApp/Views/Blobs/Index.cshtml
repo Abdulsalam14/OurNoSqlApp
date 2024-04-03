@@ -1,0 +1,98 @@
+﻿<h2>
+    Pictures
+</h2>
+
+
+<h2>Save Picture</h2>
+
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="picture" />
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+
+<h2>Save Pdf</h2>
+
+<form asp-action="UploadPdf" method="post" enctype="multipart/form-data">
+    <input type="file" name="pdf" />
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Picture</td>
+        <td>Name</td>
+        <td>Actions</td>
+    </tr>
+
+    @foreach (var item in ViewBag.blobs as List<FileBlob>)
+    {
+        <tr>
+            <td>
+                <img src="@item.Url" class="img-thumbnail" style="width:100px;" />
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="download" asp-route-filename="@item.Name">Download</a>
+                <a class="btn btn-danger" asp-action="delete" asp-route-filename="@item.Name">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+<h2>Pdfs</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <td>Name</td>
+        <td>Actions</td>
+    </tr>
+
+    @if (ViewBag.pdfs!=null)
+    {
+        @foreach (var item in ViewBag.pdfs as List<FileBlob>)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @*                 <a class="btn btn-warning" asp-action="download" asp-route-filename="@item.Name">Download</a>
+            <a class="btn btn-danger" asp-action="delete" asp-route-filename="@item.Name">Delete</a> *@
+                </td>
+                <td>
+                    <button class="btn btn-primary" onclick="showPdf('@item.Url')">View</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+
+<iframe runat="server" id="pdfViewer" style="width: 100%; height: 500px; display: none;" src="https://group12254.blob.core.windows.net/pdf/b94ba8f4-01f7-4d31-9814-442ac7b223e8.pdf"></iframe>
+
+
+<h2>Logs</h2>
+
+@if (ViewBag.logs!=null)
+{
+    @foreach (var item in ViewBag.logs as List<string>)
+    {
+        <h4>@item<br /></h4>
+    }
+}
+
+
+
+
+@* <script>
+
+    function showPdf(fileUrl) {
+        //var pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.src = fileUrl;
+        pdfViewer.style.display = 'block';
+        PDFObject.embed(pdfUrl, "#pdfViewer");
+    }
+</script> *@
