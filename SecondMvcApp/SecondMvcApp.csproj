@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Queues" Version="12.17.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AzureStorageLibrary\AzureStorageLibrary.csproj" />
+    <ProjectReference Include="..\MVCWebApp\MVCWebApp.csproj" />
   </ItemGroup>
 
 </Project>
